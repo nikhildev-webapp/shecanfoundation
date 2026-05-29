@@ -3,6 +3,8 @@
   --muted: #6b7280;
   --bg: #f7f7fb;
   --container-width: 980px;
+  --space: 1rem;
+  --space-lg: 1.5rem;
 }
 * {
   box-sizing: border-box;
@@ -22,7 +24,7 @@ body {
 .container {
   max-width: var(--container-width);
   margin: 0 auto;
-  padding: 1rem;
+  padding: var(--space);
 }
 .site-header {
   background: #fff;
@@ -38,7 +40,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: var(--space);
 }
 .logo {
   font-weight: 700;
@@ -68,7 +70,7 @@ body {
   align-items: center;
   color: #fff;
   position: relative;
-  padding: 3rem 0;
+  padding: calc(var(--space-lg) * 2) 0;
 }
 .hero-bg {
   background-size: cover;
@@ -93,12 +95,18 @@ body {
   max-width: 640px;
 }
 h1 {
-  margin: 0 0 0.5rem;
+  margin: 0 0 calc(var(--space) * 0.6);
   font-size: 2rem;
+}
+
+h2,
+h3,
+h4 {
+  margin: 0 0 calc(var(--space) * 0.6);
 }
 .lead {
   color: rgba(255, 255, 255, 0.9);
-  margin: 0 0 1rem;
+  margin: 0 0 calc(var(--space) * 1);
 }
 .feature-img {
   display: block;
@@ -111,7 +119,7 @@ h1 {
   transition: transform 420ms ease;
 }
 .actions {
-  margin-top: 1rem;
+  margin-top: calc(var(--space) * 0.8);
 }
 .btn {
   background: var(--accent);
@@ -140,18 +148,38 @@ h1 {
 }
 .about {
   background: #fff;
-  margin: 1.25rem 0 2rem;
-  padding: 1rem;
+  margin: calc(var(--space) * 1.25) 0 calc(var(--space) * 2);
+  padding: calc(var(--space) * 1.05);
   border-radius: 8px;
 }
 
-.about h3{margin-top:0;margin-bottom:0.5rem}
-.about h4{margin:0.5rem 0}
-.about ul{margin:0.25rem 0 0.75rem 1.1rem;color:var(--muted)}
-.about .lead-text{color:#0f172a;margin-bottom:0.6rem}
-.about figure{margin:0}
-.about .card-img{width:100%;border-radius:8px;display:block}
-.about figcaption{margin-top:0.5rem;font-size:0.9rem}
+.about h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+.about h4 {
+  margin: 0.5rem 0;
+}
+.about ul {
+  margin: 0.25rem 0 0.75rem 1.1rem;
+  color: var(--muted);
+}
+.about .lead-text {
+  color: #0f172a;
+  margin-bottom: 0.6rem;
+}
+.about figure {
+  margin: 0;
+}
+.about .card-img {
+  width: 100%;
+  border-radius: 8px;
+  display: block;
+}
+.about figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
 .feature-img:hover {
   transform: scale(1.02);
 }
@@ -236,6 +264,10 @@ h1 {
   object-fit: cover;
   display: block;
 }
+.card{transition:transform 260ms cubic-bezier(.2,.9,.2,1),box-shadow 260ms cubic-bezier(.2,.9,.2,1)}
+.card:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(15,23,42,0.12)}
+.card img{transition:transform 420ms ease, filter 320ms ease}
+.card:hover img{transform:scale(1.03);filter:brightness(1.02)}
 .card h4 {
   margin: 0.75rem;
   padding: 0 1rem;
@@ -250,10 +282,75 @@ h1 {
   font-size: 0.95rem;
 }
 
+/* navigation hover & focus */
+.nav-link{transition:background 180ms ease,color 180ms ease,transform 180ms ease}
+.nav-link:focus{outline:2px solid rgba(233,78,119,0.15);outline-offset:2px}
+.nav-link:hover{transform:translateY(-3px);background:#eef2f7}
+
+/* enhance fade-up for cards & sections (slightly longer) */
+.card.fade-up{animation-duration:680ms}
+.hero .fade-up{animation-duration:520ms}
+
+/* subtle pulse on CTA buttons to draw attention */
+.btn{will-change:transform}
+.btn.cta-pulse{animation:pulse 2200ms ease-in-out infinite;animation-delay:1s}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
+
 @media (max-width: 899px) {
   .card-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
   }
+}
+
+/* footer/grid adjustments */
+.footer-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space);
+}
+@media (max-width: 700px) {
+  .footer-grid {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* CTA card baseline for small screens */
+.cta-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: calc(var(--space) * 1);
+  margin: calc(var(--space) * 1) 0;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.04);
+}
+
+/* card spacing tweaks */
+.card h4 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.card p {
+  margin: 0 0 calc(var(--space) * 0.8);
+}
+
+/* small typographic utilities */
+.eyebrow {
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.95;
+  margin-bottom: calc(var(--space) * 0.25);
+}
+.section-title {
+  font-size: 1.25rem;
+  margin-bottom: calc(var(--space) * 0.8);
+}
+.hero-content h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 0;
 }
